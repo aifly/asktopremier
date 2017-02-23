@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>正弦曲线</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+	<style type="text/css">
+		*{margin: 0;pading:0;}
+		html,body{
+			height: 100%;
+		}
+		#box{
+			width:100%;
+			position: absolute;
+			left: 0;top:0;
+			background: #999;
+			height: 2138px;
+			background: url(./assets/images/map.jpg) no-repeat center bottom;
+			background-size: contain;
+		}
+		#box span{
+				width: 10px;
+				height: 10px;
+				background: red;
+				position: absolute;
+				right: 0;
+				z-index: 10;
+				bottom: 0;
+		}
+		.box{
+			width:2px;
+			height:2px;
+			background: #000;
+			position: absolute;
+			z-index: 10;
+
+		}
+		img{width:100%;position: absolute;bottom: 0;left:0;top:1257px;z-index: 1}
+	</style>
+</head>
+<body>
+	<img src="./assets/images/map.jpg" hidden="" >
+	<div id="box">
+		<span></span>
+	</div>
+	<script>
+			//y=ksin(x)
+		  window.onload = function(){
+		  	var span = document.querySelector('#box span');
+
+		  		var angle = -90;
+		  		var doc = document;
+		  		var body = doc.getElementById('box');
+		  		var viewW = document.documentElement.clientWidth;
+		  		setInterval(()=>{
+		  			angle++;
+		  			var right = (viewW / 4.2 *Math.sin(angle/180*Math.PI) + viewW / 2) + 'px'
+		  			var bottom = (((viewW/9.4) *angle/180*Math.PI)+viewW / 5.2) + 'px'
+		  			span.style.right = right;
+		  			span.style.bottom = bottom;
+		  			var box = doc.createElement('div');
+		  			box.className = 'box';
+		  			box.style.right =right;
+		  			box.style.bottom = bottom;
+		  			body.appendChild(box);
+		  		},10);
+		  }
+	</script>
+</body>
+</html>
