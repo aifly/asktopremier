@@ -12,20 +12,20 @@ class MapApp extends Component {
 		this.viewH = document.documentElement.clientHeight;
 		//房子、、  、、 、 、 、  、 、、  、 、其他
 		this.cate = [
-				{classId:1,className:'房子'},
-				{classId:2,className:'就医'},
-				{classId:3,className:'养老'},
-				{classId:4,className:'钱包'},
-				{classId:5,className:'教育'},
-				{classId:6,className:'交通'},
-				{classId:7,className:'食品'},
-				{classId:8,className:'户口本'},
-				{classId:9,className:'办事效率'},
-				{classId:10,className:'反腐'},
-				{classId:11,className:'就业'},
-				{classId:12,className:'环保'},
-				{classId:13,className:'互联网+'},
-				{classId:14,className:'其他'}
+				{classid:1,classname:'房子'},
+				{classid:2,classname:'就医'},
+				{classid:3,classname:'养老'},
+				{classid:4,classname:'钱包'},
+				{classid:5,classname:'教育'},
+				{classid:6,classname:'交通'},
+				{classid:7,classname:'食品'},
+				{classid:8,classname:'户口本'},
+				{classid:9,classname:'办事效率'},
+				{classid:10,classname:'反腐'},
+				{classid:11,classname:'就业'},
+				{classid:12,classname:'环保'},
+				{classid:13,classname:'互联网+'},
+				{classid:14,classname:'其他'}
 		]
 	}
 	render() {
@@ -41,11 +41,14 @@ class MapApp extends Component {
 				<div className='lt-map-img'>
 						<img onLoad={(e)=>{this.setState({mainHeight:e.target.height})}} src='./assets/images/map.jpg' ref='hiddenimg'/>
 				</div>
-				<section className='lt-map-main' style={mainStyle} ref='lt-map-main'>
+				<section onTouchTap={this.showDialog.bind(this)} className='lt-map-main' style={mainStyle} ref='lt-map-main'>
 					<div className='lt-map-person' ref='lt-map-person'></div>
 				</section>
 			</div>
 		);
+	}
+	showDialog(e){
+		window.obserable.trigger({type:"showDialog",data:1});
 	}
 	componentDidMount() {
 

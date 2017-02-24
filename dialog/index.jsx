@@ -2,49 +2,53 @@ import React, { Component } from 'react';
 import {PubCom} from '../components/public/pub.jsx';
 import './assets/css/index.css';
 import IScroll from 'iscroll';
+import message from 'antd/lib/message';
+import 'antd/lib/message/style/css';
 import $ from 'jquery';
+
+
 class DialogApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			visiable:true,
+			visiable:false,
 			currentClassName:'办事效率',
-			isAsk:true,
+			isAsk:false,//是否显示提问对话框
 			questionList:[
 				{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				},{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				},{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				},{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				},{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				},{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				},{
 					qid:1,
 					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					className:'办事效率',
+					classname:'办事效率',
 					hymn:'1012',
 				}
 			]
@@ -101,11 +105,11 @@ class DialogApp extends Component {
 						<div className='lt-dialog-close' onTouchTap={()=>{this.setState({visiable:false})}}></div>
 						<h2 className="lt-ask-title">我要提问</h2>
 						<div className="lt-ask-input" style={inputStyle}>
-							<textarea tabIndex={-1}></textarea>
+							<textarea placeholder='请输入您关心的问题，最多90个字' ref='lt-question-input' tabIndex={-1}></textarea>
 						</div>
 						<div className="lt-btn-group">
 							<a href="javascript:void(0)" onTouchTap={()=>{this.setState({isAsk:false})}}>取消</a>
-							<a href="javascript:void(0)">确认提交</a>
+							<a href="javascript:void(0)" onTouchTap={this.addQuestion.bind(this)}>确认提交</a>
 						</div>
 						<div className="lt-ask-text">
 							“你留言我转达”——即日起至全国两会期间，新华社客户端联合中国政府网推出“我向总理说句话”留言征集活动，我们会收集最有建设性、最热的留言，在两会结束的时候通过新华社记者向总理提问提出。
@@ -118,15 +122,65 @@ class DialogApp extends Component {
 			</div>
 		);
 	}
-	componentDidMount() {
-		this.setState({
-			scrollHeight:this.viewH - $('.lt-question-scroll-C').offset().top
+
+	addQuestion(){
+		var value = this.refs['lt-question-input'].value;
+		var s=  this;
+		if(value.length <= 0){
+			//console.log(message);
+			message.error('问题内容不能为空');
+			 return;
+		}
+		if(value.length>90){
+			message.error('请简化一下您的问题内容，90个字以内。');
+			return;
+		}
+		$.ajax({
+			url:window.baseUrl + '/h5/add_question',
+			type:"POST",
+			data:{
+				sex:1,
+				content:value,
+				hymn:1,
+				classid:1,
+				sort:1
+			},
+			success(data){
+				message[data.getret === 0?'success':'error'](data.getmsg);
+				s.refs['lt-question-input'].value = '';
+				s.setState({isAsk:false});
+				window.obserable.trigger({type:'showDialog',data:1});
+			}
 		});
-		setTimeout(()=>{
-			this.scroll = new IScroll(this.refs['lt-question-scroll-C'],{
+	}
+
+	componentDidMount() {
+
+		var s = this;
+		window.obserable.on('showDialog',(id)=>{
+			this.setState({visiable:true});
+			$.ajax({
+				url:window.baseUrl+'h5/select_question/',
+				type:"POST",
+				data:{
+					classid:id
+				},
+				success(data){
+					if(data.getret === 0){
+						s.state.questionList = data.questionlist;
+
+						s.state.scrollHeight = s.viewH - $('.lt-question-scroll-C').offset().top
+						
+						s.forceUpdate(()=>{
+							setTimeout(()=>{
+								s.scroll = new IScroll(s.refs['lt-question-scroll-C'],{})
+							},100)
+						});
+					}
+				}
 
 			})
-		},100)
+		});
 	}
 }
 export default PubCom(DialogApp);
