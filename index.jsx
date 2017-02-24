@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import IScroll from 'iscroll';
 import MapApp from './map/index.jsx';
+import DialogApp from './dialog/index.jsx';
 import  $ from 'jquery';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 class App extends Component {
 	
 	constructor(props) {
@@ -17,8 +22,9 @@ class App extends Component {
 	render() {
 	
 		return (
-				<div className="wc-video-main-ui">
+				<div className="lt-main-ui">
 					<MapApp></MapApp>
+					<DialogApp></DialogApp>
 				</div>
 			)
 	}
