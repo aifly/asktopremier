@@ -4,6 +4,9 @@ import IScroll from 'iscroll';
 import MapApp from './map/index.jsx';
 import DialogApp from './dialog/index.jsx';
 import StartApp from './start/index.jsx';
+import IntroduceApp from './introduce/index.jsx';
+import SubmitApp from './submit/index.jsx';
+import ShareApp from './share/index.jsx';
 import  $ from 'jquery';
 import Obserable from './assets/js/obserable';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -26,9 +29,13 @@ class App extends Component {
 	
 		return (
 				<div className="lt-main-ui">
+					<StartApp></StartApp>
+					<IntroduceApp></IntroduceApp>
 					<MapApp></MapApp>
 					<DialogApp></DialogApp>
-					<StartApp></StartApp>
+					<SubmitApp></SubmitApp>
+					<ShareApp></ShareApp>
+					
 				</div>
 			)
 	}

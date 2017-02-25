@@ -4,6 +4,7 @@ import './assets/css/index.css';
 import IScroll from 'iscroll';
 import message from 'antd/lib/message';
 import 'antd/lib/message/style/css';
+import RankingListApp from '../rankinglist/index.jsx';
 import $ from 'jquery';
 
 
@@ -79,7 +80,7 @@ class DialogApp extends Component {
 							<div className='lt-dialog-title'><span>{this.state.currentClassName}问题</span><span>讨论组</span></div>
 							<img className='lt-meeting' src='./assets/images/meeting.png'/>
 							<img className='lt-logo' src='./assets/images/logo.png'/>
-							<div className='lt-question-order'>排行榜</div>
+							<RankingListApp></RankingListApp>
 						</div>
 						<div className='lt-question-scroll' >
 
@@ -155,6 +156,10 @@ class DialogApp extends Component {
 	}
 
 	componentDidMount() {
+
+		window.obserable.on('closeDialog',()=>{
+			this.setState({visiable:false});
+		});
 
 		var s = this;
 		window.obserable.on('showDialog',(id)=>{

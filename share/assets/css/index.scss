@@ -1,0 +1,69 @@
+﻿@import "../../../assets/css/base.scss";
+.lt-share-main-ui{
+  @include pos(a);
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index: 110;
+  background: #faf9ea;
+  .lt-share-text{
+    width:9rem;
+    height:5rem;
+    @include pos(r);
+    border:1px solid transparent;
+    margin:0 auto;
+    div{
+      width:80%;
+      margin:.5rem auto;
+    }
+  }
+  .lt-share-follow{
+     width:3rem;
+     @include pos(a);
+     bottom: 0;
+     left:3.5rem;
+     img{
+      width:.7rem;
+      vertical-align: bottom;
+
+     }
+     span{
+      display: inline-block;;
+      margin-left: .2rem;
+      font-size: .5rem;
+      color:#999;
+     }
+  }
+
+  .lt-share-btn,.lt-share-msg{
+    width:5rem;
+    @include pos(a);
+    margin-top: .3rem;
+    left:2.5rem;
+    margin-left: 0;
+    img{
+    }
+  }
+  .lt-share-msg{
+    margin-top: 2rem;
+  }
+}
+
+@media all and (max-height: 460px) {
+  .lt-share-main-ui{
+    .lt-share-btn-group{
+      width:8rem;
+      margin:0 auto;
+      @include displayBox(horizontal);
+      section{
+        margin:.3rem;
+
+        left:0;
+
+        -webkit-box-flex:1;
+        @include pos(r);
+      }
+    }
+  }  
+}

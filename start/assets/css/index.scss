@@ -1,32 +1,114 @@
 ﻿@import "../../../assets/css/base.scss";
 
-html, body, div, p, ul, li, ol, dl, dt, dd, header, footer, video, h1, h2, h3, h4, canvas, section, figure {
-  padding: 0;
-  margin: 0;
+$baseColor:#189cfb;
+.lt-start-main-ui{
+   @include pos(a);
+   left:0;
+   top:0;
+   width:10rem;
+   z-index: 102;
+   overflow: hidden;
 }
+.lt-start-map{
+    height:100%;
+    margin-left: -944px;
+    @include pos(r);
+    .lt-door{
+      @include pos(a);
+      z-index: 10;
+      right: -2px;
+      height:83%;
+    }
+    .lt-cloud{
+      @include pos(a);
+      z-index:99;
+      left:0;
+      height:4rem;
+      top:0;
+    }
+   img{
+    height:100%;
+    width: auto;
+   }
+   .lt-talk{
+    @include pos(a);
+    right:4rem;
+    width:4rem;
+    z-index: 12;
+    top:4.4rem;
+    div{
+      color:$baseColor;
+      @include pos(a);
+      top:.4rem;
+      width:3rem;
+      left:.5rem;
+      font-size: .5rem;
 
-a {
-  text-decoration: none;
-}
+    }
+    img{
+      width:100%;
+      height:auto;
 
-li {
-  list-style: none;
-}
+    }
+   }
 
-html, body {
-  height: 100%;
-}
-body{
-	  font-family: "Helvetica Neue", 'Helvetica', "Microsoft YaHei", '微软雅黑', arial, sans-serif;
-	  overflow-x:hidden;
-}
-img {
-  border: none;
-  vertical-align: middle;
-  width: 100%;
-  height: auto;
-}
 
-input, textarea {
-  outline: none;
+   .lt-selected-sex{
+
+     @include br(5px);
+     width:8rem;
+     height:4rem;
+     background: rgba(255,255,255,.8);
+     box-shadow:0 0 4px rbga(0,0,0,.5);
+     @include pos(a);
+     z-index: 16;
+     right:.4rem;
+     bottom:6.5rem;
+     h5{
+      text-align: center;
+      color:$baseColor;
+      height:1rem;
+      line-height: 1rem;
+     }
+     .lt-sex-group{
+        width:100%;
+        @include displayBox(horizontal);
+        img{
+          width:1.5rem;height:auto;
+          @include pos(a);
+          left:50%;
+          top:.2rem;
+          margin-left: -.75rem;
+        }
+        div{
+          @include pos(r);
+          &:first-of-type{
+            border-right:1px solid rgba(24,156,251,.3);
+          }
+          height:2.8rem;
+          -webkit-box-flex:1;
+          text-align: center;
+          img:last-of-type{
+              opacity: .5;
+              &.active{
+                @include transition(1s);
+                @include transform(scale(2));
+                opacity:0;
+              }
+          }
+        }
+     }
+   }
+}
+.lt-visitor{
+  img{
+    height:100%;
+    width:auto;  
+  }
+  height:6rem;
+  
+  @include pos(a);
+  z-index: 12;
+  left:0;
+  bottom: 25%;
 }
