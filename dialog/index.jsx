@@ -3,7 +3,7 @@ import {PubCom} from '../components/public/pub.jsx';
 import './assets/css/index.css';
 import IScroll from 'iscroll';
 import message from 'antd/lib/message';
-import 'antd/lib/message/style/css';
+import 'antd/lib/message/style/css';  
 import RankingListApp from '../rankinglist/index.jsx';
 import $ from 'jquery';
 
@@ -14,44 +14,11 @@ class DialogApp extends Component {
 		this.state={
 			visiable:false,
 			currentClassName:'办事效率',
+			currentClassId:1,
 			isAsk:false,//是否显示提问对话框
+			isSend:false,
 			questionList:[
-				{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				},{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				},{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				},{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				},{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				},{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				},{
-					qid:1,
-					content:'欢欢迎收看本期的[一周热评]！上周，小岳岳泡上了好妹妹，情人节发布合作单曲《送情郎》；Bruno Mars新专全碟上线，感受火星老仙的无边魅力；打雷姐Lana Del Rey发布新单',
-					classname:'办事效率',
-					hymn:'1012',
-				}
+				
 			]
 		};
 		this.viewW = document.documentElement.clientWidth;
@@ -76,8 +43,7 @@ class DialogApp extends Component {
 					<artile>
 						<div className='lt-dialog-close' onTouchTap={(e)=>{e.preventDefault();this.setState({visiable:false})}}></div>
 						<div className='lt-dialog-top-eara'>
-							<div className='lt-dialog-title'>新华社记者</div>
-							<div className='lt-dialog-title'><span>{this.state.currentClassName}问题</span><span>讨论组</span></div>
+							<div className='lt-dialog-title'><span>{this.state.currentClassName}</span><span>留言厅</span></div>
 							<img className='lt-meeting' src='./assets/images/meeting.png'/>
 							<img className='lt-logo' src='./assets/images/logo.png'/>
 							<RankingListApp></RankingListApp>
@@ -95,7 +61,7 @@ class DialogApp extends Component {
 										return <li key={i} style={liStyle}>
 											<div className="lt-question-content">{item.content}</div>
 											<span className='lt-friend'>网友{item.qid}</span>
-											<span className='lt-follow'><img src='./assets/images/zan.png'/><span>{item.hymn}</span></span>
+											<span className='lt-follow' onTouchTap={this.follow.bind(this,item.qid)}><img src='./assets/images/zan.png'/><span>{item.hymn}</span></span>
 										</li>
 									})}
 								</ul>
@@ -103,7 +69,7 @@ class DialogApp extends Component {
 						</div>
 					</artile>
 					<artile>
-						<div className='lt-dialog-close' onTouchTap={()=>{this.setState({visiable:false})}}></div>
+						<div className='lt-dialog-close' onTouchTap={()=>{this.setState({visiable:false,isAsk:false})}}></div>
 						<h2 className="lt-ask-title">我要提问</h2>
 						<div className="lt-ask-input" style={inputStyle}>
 							<textarea placeholder='请输入您关心的问题，最多90个字' ref='lt-question-input' tabIndex={-1}></textarea>
@@ -119,9 +85,39 @@ class DialogApp extends Component {
 							<img src="./assets/images/logo.png"/>
 						</div>
 					</artile>
+
+					{this.state.isSend && <div className='lt-send'>
+											<img src='./assets/images/2.gif'/>
+									</div>}
+
 				</section>
+
+
 			</div>
 		);
+	}
+
+
+	follow(qid){
+		
+		var s= this;
+		$.ajax({
+			url:window.baseUrl+'h5/click_hymn',
+			data:{
+				qid:qid
+			},
+			success(data){
+				if(data.getret === 0){
+					 	message.success(data.getmsg);
+					 	s.state.questionList.forEach((item,i)=>{
+					 			if(item.qid === qid){
+					 				item.hymn = item.hymn + 1;
+					 			}
+					 	})
+					 	s.forceUpdate();
+				}
+			}
+		})
 	}
 
 	addQuestion(){
@@ -140,17 +136,34 @@ class DialogApp extends Component {
 			url:window.baseUrl + '/h5/add_question',
 			type:"POST",
 			data:{
-				sex:1,
+				sex:window.obserable.trigger({type:'getSex'}) || 1,
 				content:value,
 				hymn:1,
-				classid:1,
+				classid:s.state.currentClassId,
 				sort:1
 			},
 			success(data){
 				message[data.getret === 0?'success':'error'](data.getmsg);
 				s.refs['lt-question-input'].value = '';
-				s.setState({isAsk:false});
-				window.obserable.trigger({type:'showDialog',data:1});
+				if(data.getret === 0){
+					s.setState({
+						isAsk:false,
+						isSend:true
+					});
+
+					setTimeout(()=>{
+						s.setState({
+							isSend:false
+						});
+
+
+						window.obserable.trigger({type:'showSubmit',data:{classid:s.state.currentClassId,classname:s.state.currentClassName,hymn:data.totalnum,qid:data.qid}})
+						window.obserable.trigger({type:'closeDialog'});
+
+					},1500)
+
+					
+				}
 			}
 		});
 	}
@@ -160,15 +173,18 @@ class DialogApp extends Component {
 		window.obserable.on('closeDialog',()=>{
 			this.setState({visiable:false});
 		});
-
 		var s = this;
-		window.obserable.on('showDialog',(id)=>{
-			this.setState({visiable:true});
+		window.obserable.on('showDialog',(opt)=>{
+			this.setState({
+				visiable:true,
+				currentClassId:opt.classid,
+				currentClassName:opt.classname
+			});
+			
 			$.ajax({
 				url:window.baseUrl+'h5/select_question/',
-				type:"POST",
 				data:{
-					classid:id
+					classid:opt.classid
 				},
 				success(data){
 					if(data.getret === 0){

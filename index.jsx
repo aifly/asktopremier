@@ -34,13 +34,29 @@ class App extends Component {
 					<MapApp></MapApp>
 					<DialogApp></DialogApp>
 					<SubmitApp></SubmitApp>
-					<ShareApp></ShareApp>
 					
 				</div>
 			)
 	}
 	componentDidMount(){
 		
+		$(document).one('touchstart',()=>{
+				$('#audio')[0].play();
+		});
+		$('.lt-play').on('touchstart',()=>{
+			if($('#audio')[0].paused){
+					$('#audio')[0].play();
+			}
+			else{
+				$('#audio')[0].pause();	
+
+				$('.lt-play').removeClass('active');
+			}
+		})
+		$('#audio').on('play',()=>{
+			$('.lt-play').addClass('active');
+		})
+
 		$.ajax({
 			url:window.baseUrl+'/h5/update_pvnum/',
 			type:"POST",

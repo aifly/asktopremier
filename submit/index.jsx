@@ -11,6 +11,9 @@ class SubmitApp extends Component {
 		this.state={
 			className:'办事效率',
 			questionNum:123,
+			show:false,
+			qid:-1
+
 		};
 		this.viewW = document.documentElement.clientWidth;
 		this.viewH = document.documentElement.clientHeight;
@@ -23,7 +26,7 @@ class SubmitApp extends Component {
 			backgroundSize:"contain"
 		}
 		return (
-			<div className='lt-submit-main-ui'>
+			<div className={'lt-submit-main-ui '+ (this.state.show?'active':'')}>
 				<div className='lt-submit-top'>
 
 					<img src='./assets/images/commit-bg.png'/>
@@ -45,22 +48,43 @@ class SubmitApp extends Component {
 					<img src='./assets/images/jidong.png'/>
 				</div>
 				<div className='lt-submit-btn-C'>
-					<a href='javascript:void(0)'>邀请好友顶一下</a>
+					<a href={'./share.html?qid='+this.state.qid} onTouchTap={this.ding.bind(this)}>邀请好友顶一下</a>
 					<a href='javascript:void(0)' onTouchTap={this.closeDialog.bind(this)}>不急，继续看看</a>
 				</div>
 			</div>
 		);
 	}
 
+ setCookie(cname, cvalue, exdays){
+     var d = new Date();  
+      d.setTime(d.getTime() + (60*1000));  
+      var expires = "expires="+d.toUTCString();  
+      document.cookie = cname + "=" + cvalue + "; " + expires;  
+  }
+
+	ding(){
+		 this.setCookie('qid',this.state.qid,null);
+	}
+
 	closeDialog(){
 		
 		window.obserable.trigger({
 			type:'closeDialog'
+		});
+		this.setState({
+			show:false
 		})
 	}
 
 	componentDidMount() {
-
+		window.obserable.on('showSubmit',(opt)=>{
+			this.setState({
+				show:true,
+				className:opt.classname,
+				questionNum:opt.hymn,
+				qid:opt.qid
+			})
+		});
 	}
 }
 export default PubCom(SubmitApp);

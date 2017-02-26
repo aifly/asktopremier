@@ -36,7 +36,7 @@ $baseColor:#189cfb;
 	@include pos(f);
 	width:100%;
 	height: 100%;
-	z-index: 120;
+	z-index: 200;
 	left: 0;
 	top:0;
 }
@@ -54,6 +54,7 @@ $baseColor:#189cfb;
 			@include transform(rotateY(180deg));
 			artile:last-of-type{
 				z-index: 100;
+				@include transform(rotateY(180deg) translate3d(0,0,1px));
 			}
 		}
 		artile {
@@ -169,12 +170,12 @@ $baseColor:#189cfb;
 		color: $baseColor;
 		right:.8rem;
 		top:-1rem;
-		$size: 2.3rem;
-
+		$size: 1.5rem;
 		text-align: center;
 		@include br(50%);
 		letter-spacing: .1rem;
-		padding: .3rem;
+		padding:.2rem;
+		box-sizing:content-box;
 		&:after{
 			 content:'';
 			 width:2rem;
@@ -182,8 +183,8 @@ $baseColor:#189cfb;
 			 background: #fff;
 			 @include br(50%);
 			 @include pos(a);
-			 left: .1rem;
-			 top:.1rem;
+			 left: -.1rem;
+			 top:-.05rem;
 			 z-index: -1;
 		}
 		width: $size;
@@ -194,8 +195,8 @@ $baseColor:#189cfb;
 			content: '';
 			position:absolute;
 			z-index: 2;
-			left: -.3rem;
-			top: -.3rem;
+			left: -.1rem;
+			top: -.1rem;
 			width: $size + .6;
 			height: $size + .6;
 			background-color: rgba(255,255,255,.5);
@@ -311,6 +312,26 @@ $baseColor:#189cfb;
 		left:50%;
 		@include transform(translate3d(-50%,-50%,0));
 	}
+
+
+	.lt-send{
+		@include pos(a);
+		z-index: 200;
+		left: 0;
+		top: 0;
+		width:100%;
+		height: 100%;
+		background: #000;
+		text-align: center;
+		img{
+			height: 80%;
+			margin-top: 10%;
+			width:auto;
+		}
+		@include transform(translate3d(0,0,1px));
+
+	
+	}
 }
 
 @media all and (max-height:460px){
@@ -346,7 +367,7 @@ $baseColor:#189cfb;
         opacity: 0.5;  
     }  
     100% {  
-        transform: scale(1.1);  
+        transform: scale(1.5);  
         opacity: 0.0;  
     }  
 }  
@@ -368,7 +389,7 @@ $baseColor:#189cfb;
         opacity: 0.5;  
     }  
     100% {  
-        -webkit-transform: scale(1.1);  
+        -webkit-transform: scale(1.5);  
         opacity: 0.0;  
     }  
 }  

@@ -32,24 +32,137 @@ input, textarea {
 }
 
 
+.lt-map-main-ui {
+	@include  pos(a);
+	z-index: 125;
+	left:0;
+	top:0;
+	overflow: hidden;
+	width:100%;
+	height:100%;
+	@include transform(translate3d(100%,0,0));
+	@include transition_transform(1s linear);
+	&.active{
+		@include transform(translate3d(0,0,0));
+	}
+}
+
+.lt-cate-name{
+	 @include pos(a);
+	 
+	 left: 0;
+	 font-size: .5rem;
+	 width:2.3rem;
+	 
+	 text-align: center;
+	 $height:4.5rem;
+	 height:4rem;
+	 bottom: 1rem;
+	 span{
+	   @include pos(a);
+	   top:.12rem;
+	   left: 0;
+	   width:100%;
+	 }
+	 @for $i from 1 through 14 {
+	 	  &:nth-of-type(#{$i}){
+	 	  	color:#000;
+	 	  	bottom: ($i -  1) * $height;
+	 	  	@if $i % 2 == 0 {
+	 	  		right:0;
+	 	  		left:auto;
+	 	  	}
+
+	 	  	@if $i == 3 {
+	 	  		bottom: 8.5rem;
+	 	  	}
+	 	  	@if $i == 4 {
+	 	  		bottom: 12rem;
+	 	  	}
+
+	 	  	@if $i == 5 {
+	 	  		bottom: 15rem;
+	 	  	}
+	 	  	@if $i == 6 {
+	 	  		bottom: 18.5rem;
+	 	  	}
+
+	 	  	@if $i == 7 {
+	 	  		bottom: 22rem;
+	 	  	}
+
+	 	  	@if $i == 8 {
+	 	  		bottom: 25rem;
+	 	  	}
+
+	 	  	@if $i == 9 {
+	 	  		bottom: 28.5rem;
+	 	  		font-size: .44rem;
+	 	  		span{
+	 	  			top:.22rem;
+	 	  		}
+	 	  	}
+
+	 	  	@if $i == 10 {
+	 	  		bottom: 32rem;
+	 	  	}
+
+	 	  	@if $i == 11 {
+	 	  		bottom: 35rem;
+	 	  	}
+
+	 	  	@if $i == 12 {
+	 	  		bottom: 38rem;
+	 	  	}
+	 	  	@if $i == 13 {
+	 	  		bottom: 41.5rem;
+	 	  	}
+	 	  	@if $i == 14 {
+	 	  		bottom: 45rem;
+	 	  	}
+
+	 	  }
+	 }
+
+	 &:nth-of-type(1){
+	 	bottom: 1.5rem;
+	 }
+
+}
+
 .lt-map-img{
 	opacity:0;
 	z-index: -1;
 	@include pos(f);
 }
+.lt-nav-scroll{
+
+	width:10rem;
+	background: #ebebeb;
+	height: 2rem;
+	@include pos(a);
+	bottom: 0;
+	$size:2rem;
+	ul{
+		width:$size * 14;
+		@include displayBox(horizontal);
+		li{
+			-webkit-box-flex:1;
+			padding:.3rem;
+		}
+	}
+}
 
 .lt-map-main{
 	width:100%;
 	@include pos(a);
-	bottom: 0;
+	top:0;
 	left: 0;
 }
 
 .lt-map-person{
 	@include pos(a);
 	bottom: 0;
-	width:10px;
-	height:10px;
-	background: red;
+	width:1rem;
 	right: 2.5rem;
 }

@@ -6,11 +6,10 @@
   "author": "aifly <aifly_xc@163.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --port 3000"
+    "start": "webpack-dev-server --hot --inline --port 4500"
   },
   "dependencies": {
     "antd": "^2.7.2",
-    "antd-mobile": "^1.0.1",
     "babel-core": "^5.8.38",
     "babel-loader": "^5.3.2",
     "babel-plugin-antd": "^0.5.1",

@@ -5,7 +5,15 @@
    @include pos(a);
    left:0;
    top:0;
-   z-index: 109;
+   z-index: 123;
+   @include transform(translate3d(100%,0,0));
+   @include transition_transform(1s linear);
+   &.active{
+      @include transform(translate3d(0,0,0));
+   }
+   &.hide{
+     @include transform(translate3d(-100%,0,0));
+   }
 }
 .lt-pv{
    width:8rem;

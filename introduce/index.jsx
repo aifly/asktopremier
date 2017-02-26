@@ -7,7 +7,9 @@ class IntroduceApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			pv:1000
+			pv:1000,
+			starting:false,
+			ending:false
 		};
 		this.viewW = document.documentElement.clientWidth;
 		this.viewH = document.documentElement.clientHeight;
@@ -16,7 +18,7 @@ class IntroduceApp extends Component {
 	render() {
 
 		var style = {
-			background:'url(./assets/images/intr-bg.png) no-repeat center top',
+			background:'url(./assets/images/intr-bg.jpg) no-repeat center top',
 			backgroundSize:'cover'
 
 		}
@@ -27,7 +29,7 @@ class IntroduceApp extends Component {
 		}
 
 		return (
-			<div className='lt-intro-main-ui' style={style}>
+			<div className={'lt-intro-main-ui '+  (this.state.starting?"active ":' ')+  (this.state.ending?"hide ":' ')} style={style}>
 				<div className='lt-pv' style={pvStyle}>
 					欢迎第<span>{this.state.pv}</span>位参与者
 				</div>
@@ -41,10 +43,22 @@ class IntroduceApp extends Component {
 
 	beginGame(){
 		this.refs['hidden'].classList.add('active');
+		this.setState({
+			starting:false,
+			ending:true
+		});
+		window.obserable.trigger({type:'showMap'});
 	}
 
 
 	componentDidMount() {
+
+		window.obserable.on('showIntro',()=>{
+			this.setState({
+				starting:true
+			})
+		})
+
 		var s= this;
 		$.ajax({
 			url:window.baseUrl+'h5/select_pvnum/',

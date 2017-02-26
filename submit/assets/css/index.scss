@@ -3,10 +3,18 @@
 .lt-submit-main-ui{
   width:100%;
   height:100%;
+  @include transform3d();
   @include pos(a);
+
   left:0;
   top:0;
   z-index: 114;
+  display: none;
+  &.active{
+      z-index: 314;
+      display: block;
+      @include transform(translate3d(0,0,2px));
+  }
   background: #fff;
   .lt-submit-top{
     @include pos(r);
@@ -73,6 +81,7 @@
     width:4rem;
     left:3rem;
     bottom:1rem;
+    font-size: .5rem;
      a{
         color:#4e7a78;
         height:1rem;
