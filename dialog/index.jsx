@@ -50,10 +50,10 @@ class DialogApp extends Component {
 						</div>
 						<div className='lt-question-scroll' >
 
-							<div className='lt-ask-btn' onTouchTap={()=>{this.setState({isAsk:true})}}>我要提问</div>
+							<div className='lt-ask-btn' onTouchTap={()=>{this.setState({isAsk:true})}}>我要留言</div>
 							<div className='lt-info-text'>
-								<div>还没想好问什么吗？</div>
-								<div>不如先看看其他网友提的问题吧</div>
+								<div>还没想好说点什么吗？</div>
+								<div>不如先看看其他网友的留言吧</div>
 							</div>
 							<div className='lt-question-scroll-C' ref='lt-question-scroll-C' style={{height:this.state.scrollHeight}}>
 								<ul>
@@ -70,16 +70,16 @@ class DialogApp extends Component {
 					</artile>
 					<artile>
 						<div className='lt-dialog-close' onTouchTap={()=>{this.setState({visiable:false,isAsk:false})}}></div>
-						<h2 className="lt-ask-title">我要提问</h2>
+						<h2 className="lt-ask-title">我要留言</h2>
 						<div className="lt-ask-input" style={inputStyle}>
 							<textarea placeholder='请输入您关心的问题，最多90个字' ref='lt-question-input' tabIndex={-1}></textarea>
 						</div>
 						<div className="lt-btn-group">
-							<a href="javascript:void(0)" onTouchTap={()=>{this.setState({isAsk:false})}}>取消</a>
+							<a href="javascript:void(0)" onTouchTap={()=>{this.setState({isAsk:false,visiable:false})}}>继续看看</a>
 							<a href="javascript:void(0)" onTouchTap={this.addQuestion.bind(this)}>确认提交</a>
 						</div>
 						<div className="lt-ask-text">
-							“你留言我转达”——即日起至全国两会期间，新华社客户端联合中国政府网推出“我向总理说句话”留言征集活动，我们会收集最有建设性、最热的留言，在两会结束的时候通过新华社记者向总理提问提出。
+							“你留言我转达”——即日起至全国两会期间，新华社客户端联合国务院客户端推出“我向总理说句话”留言征集活动，你的留言，有可能在两会结束后的总理记者会上通过新华社记者向总理提出。
 						</div>
 						<div className="lt-ask-logo">
 							<img src="./assets/images/logo.png"/>
@@ -136,7 +136,7 @@ class DialogApp extends Component {
 			url:window.baseUrl + '/h5/add_question',
 			type:"POST",
 			data:{
-				sex:window.obserable.trigger({type:'getSex'}) || 1,
+				sex:window.obserable.trigger({type:'getSex'}) === undefined? 1 :window.obserable.trigger({type:'getSex'}),
 				content:value,
 				hymn:1,
 				classid:s.state.currentClassId,
@@ -182,7 +182,7 @@ class DialogApp extends Component {
 			});
 			
 			$.ajax({
-				url:window.baseUrl+'h5/select_question/',
+				url:window.baseUrl+'h5/get_validquestion//',
 				data:{
 					classid:opt.classid
 				},

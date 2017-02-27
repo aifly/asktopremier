@@ -17,6 +17,14 @@ $baseColor:#189cfb;
 .lt-start-map{
     height:100%;
     @include pos(r);
+    .lt-m{
+      @include pos(a);
+      width:5rem;
+      z-index: 9;
+      height: auto;
+      right: 5rem;
+      top:2.8rem;
+    }
     .lt-door{
       @include pos(a);
       z-index: 10;

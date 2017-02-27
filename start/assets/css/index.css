@@ -19,6 +19,13 @@
 .lt-start-map {
   height: 100%;
   position: relative; }
+  .lt-start-map .lt-m {
+    position: absolute;
+    width: 5rem;
+    z-index: 9;
+    height: auto;
+    right: 5rem;
+    top: 2.8rem; }
   .lt-start-map .lt-door {
     position: absolute;
     z-index: 10;

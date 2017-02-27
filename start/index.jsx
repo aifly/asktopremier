@@ -27,7 +27,8 @@ class StartApp extends Component {
 				<div className='lt-start-map' ref='lt-start-map' style={{width:this.state.imgWidth}}>
 					<img ref='img' onLoad={this.imgLoad.bind(this)} src='./assets/images/start-bg.png'/>
 					<img className='lt-door' src='./assets/images/door.png'/>
-					<img className='lt-cloud' ref='cloud' src='./assets/images/cloud.png'/>
+					<img className='lt-m' src='./assets/images/m.png'/>
+					
 					{this.state.iNow > -1 && <div className='lt-talk'>
 						<img src='./assets/images/vilidate-bg.png'/>
 						<div>{this.state.steps[this.state.iNow]}</div>
@@ -60,13 +61,12 @@ class StartApp extends Component {
 		var map = $(this.refs['lt-start-map']);
 		var speed = 5;
 		var startX = 0;
-		var cloud = $(this.refs['cloud']);
 		var visitor = $(this.refs['lt-visitor']);
 		var step = 0 ;
 		var iNow = 0;
-		 
-		this.timer = setInterval(()=>{
 
+		var start=true;
+		var render = ()=>{
 			//clearInterval(this.timer);
 			startX+=speed;
 
@@ -74,7 +74,7 @@ class StartApp extends Component {
 			
 			if(startX>this.state.imgWidth - this.viewW){
 				startX = this.state.imgWidth - this.viewW;
-				clearInterval(this.timer);
+				 start = false;
 
 				this.setState({
 					showPerson:true
@@ -132,14 +132,16 @@ class StartApp extends Component {
 				});
 			}
 			map.css({'-webkit-transform':'translate3d(-'+startX+'px,0,0)'});
-			cloud.css({'-webkit-transform':'translate3d(-'+startX/3+'px,0,0)'});
-			//
 			
-		},16);
+			start &&	window.webkitRequestAnimationFrame(render);
+		}
+
+		window.webkitRequestAnimationFrame(render);
+		 
+		 
 	}
 
 	selectedSex(index){
-
 		if(!this.selected){
 			this.selected = !this.selected;			
 			window.obserable.on('getSex',()=>{

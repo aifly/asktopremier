@@ -8,7 +8,7 @@ class MapApp extends Component {
 		super(props);
 		this.state={
 			mainHeight:0,
-			starting:false,
+			starting:true,
 			defaultSteps:['./assets/images/vl.png','./assets/images/vl1.png','./assets/images/vl2.png','./assets/images/vl3.png'],
 			rightSteps:['./assets/images/visit.png','./assets/images/visit1.png','./assets/images/visit2.png','./assets/images/visit3.png'],
 			steps:['./assets/images/vl.png','./assets/images/vl1.png','./assets/images/vl2.png','./assets/images/vl3.png'],
@@ -17,9 +17,9 @@ class MapApp extends Component {
 		};
 		this.viewW = document.documentElement.clientWidth;
 		this.viewH = document.documentElement.clientHeight;
-		//房子、、  、、 、 、 、  、 、、  、 、其他
+
 		this.cate = [
-			{classid:1,classname:'房子',navImg:'fc'},
+			{classid:1,classname:'住房',navImg:'fc'},
 			{classid:2,classname:'就医',navImg:'jiuyi'},
 			{classid:3,classname:'养老',navImg:'yl'},
 			{classid:4,classname:'钱包',navImg:'qb'},
@@ -73,6 +73,11 @@ class MapApp extends Component {
 						<div className='lt-map-person' ref='lt-map-person'>
 							<img src={this.state.steps[this.state.currentStep]}/>
 						</div>
+						
+						<div className='lt-ar'  style={{WebkitTransform:'rotate(140deg)'}}>
+										<img src='./assets/images/ar.gif'/>
+									</div>
+						
 					</section>
 				</div>
 				

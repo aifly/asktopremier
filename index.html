@@ -113,61 +113,41 @@
 									"./assets/images/begin.png",
 									"./assets/images/bsxl.png",
 									"./assets/images/bsxl2.png",
-									"./assets/images/class-bg.png",
-									"./assets/images/cloud.png",
 									"./assets/images/commit-bg.png",
 									"./assets/images/commit-result.png",
 									"./assets/images/count-bg.png",
 									"./assets/images/ding.png",
 									"./assets/images/door.png",
 									"./assets/images/fc.png",
-									"./assets/images/fc2.png",
 									"./assets/images/ff.png",
-									"./assets/images/ff2.png",
 									"./assets/images/hb.png",
-									"./assets/images/hb2.png",
 									"./assets/images/hkb.png",
-									"./assets/images/hkb2.png",
 									"./assets/images/hlw.png",
-									"./assets/images/hlw2.png",
 									"./assets/images/intr-bg.png",
 									"./assets/images/jiaoyu.png",
-									"./assets/images/jiaoyu2.png",
 									"./assets/images/jidong.png",
 									"./assets/images/jiuyi.png",
-									"./assets/images/jiuyi2.png",
 									"./assets/images/jt.png",
-									"./assets/images/jt2.png",
 									"./assets/images/jy.png",
-									"./assets/images/jy2.png",
 									"./assets/images/logo.png",
 									"./assets/images/man.png",
 									"./assets/images/map.jpg",
 									"./assets/images/meeting.png",
 									"./assets/images/msg.png",
 									"./assets/images/qb.png",
-									"./assets/images/qb2.png",
 									"./assets/images/qt.png",
-									"./assets/images/qt2.png",
 									"./assets/images/question-bg.png",
-									"./assets/images/share-bg.png",
-									"./assets/images/share-question-bg.png",
 									"./assets/images/sp.png",
-									"./assets/images/sp2.png",
 									"./assets/images/start-bg.png",
 									"./assets/images/vilidate-bg.png",
 									"./assets/images/visit.png",
 									"./assets/images/visit1.png",
 									"./assets/images/visit2.png",
 									"./assets/images/visit3.png",
-									"./assets/images/vl.png",
-									"./assets/images/vl1.png",
-									"./assets/images/vl2.png",
-									"./assets/images/vl3.png",
 									"./assets/images/women.png",
 									"./assets/images/yl.png",
-									"./assets/images/yl2.png",
 									"./assets/images/zan.png",
+									"./assets/images/m.png"
 		        ];
 
 		        var scale = document.getElementById('l-loading-scale');
@@ -196,7 +176,8 @@
 		                    if(window.location.href.indexOf('192.168.2.109')<=-1 || window.location.href.indexOf('http://localhost:8080')<=-1){
 		                        src = './assets/js/index.js?t='+new Date().getTime();
 		                    }*/
-		                    src = './assets/js/index.js?t=';
+		                    src = './assets/js/index.js?t='+new Date().getTime();
+		                    //src='http://localhost:4500/index.js'
 		                    s.src= src;
 		                }
 		                context.arc ( x, y, r, - .5 * Math.PI, 1.5 * Math.PI , false );
