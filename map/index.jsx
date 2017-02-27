@@ -8,7 +8,7 @@ class MapApp extends Component {
 		super(props);
 		this.state={
 			mainHeight:0,
-			starting:true,
+			starting:false,
 			defaultSteps:['./assets/images/vl.png','./assets/images/vl1.png','./assets/images/vl2.png','./assets/images/vl3.png'],
 			rightSteps:['./assets/images/visit.png','./assets/images/visit1.png','./assets/images/visit2.png','./assets/images/visit3.png'],
 			steps:['./assets/images/vl.png','./assets/images/vl1.png','./assets/images/vl2.png','./assets/images/vl3.png'],
