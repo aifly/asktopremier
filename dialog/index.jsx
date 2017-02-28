@@ -79,7 +79,7 @@ class DialogApp extends Component {
 							<a href="javascript:void(0)" onTouchTap={this.addQuestion.bind(this)}>确认提交</a>
 						</div>
 						<div className="lt-ask-text">
-							“你留言我转达”——即日起至全国两会期间，新华社客户端联合国务院客户端推出“我向总理说句话”留言征集活动，你的留言，有可能在两会结束后的总理记者会上通过新华社记者向总理提出。
+							“你留言我转达”——即日起至全国两会期间，新华社客户端联合国务院客户端推出“想给总理捎句话”留言征集活动，你的留言，有可能在两会结束后的总理记者会上通过新华社记者向总理提出。
 						</div>
 						<div className="lt-ask-logo">
 							<img src="./assets/images/logo.png"/>
